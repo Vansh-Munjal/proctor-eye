@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Distraction Reports</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f2f2f2;
+      margin: 0;
+      padding: 20px;
+    }
+
+    h1 {
+      color: #333;
+      text-align: center;
+    }
+
+    .report {
+      background: #fff;
+      border-radius: 10px;
+      padding: 20px;
+      margin: 20px auto;
+      max-width: 700px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+
+    .report h3 {
+      color: #007bff;
+      margin-bottom: 5px;
+    }
+
+    .report p {
+      margin: 4px 0;
+      color: #555;
+    }
+
+    .report ul {
+      list-style: none;
+      padding: 0;
+      margin-top: 10px;
+    }
+
+    .report li {
+      background: #f0f0f0;
+      padding: 8px;
+      border-radius: 5px;
+      margin-bottom: 6px;
+    }
+
+    .logout {
+      text-align: center;
+      margin-top: 10px;
+    }
+
+    .logout a {
+      text-decoration: none;
+      color: white;
+      background: #dc3545;
+      padding: 10px 15px;
+      border-radius: 5px;
+    }
+
+    .logout a:hover {
+      background: #b02a37;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>📋 Distraction Reports</h1>
+  <div class="logout">
+    <a href="/logout">Logout</a>
+  </div>
+
+  {% for report in reports %}
+    <div class="report">
+      <h3>Candidate ID: {{ report.candidate_id }}</h3>
+      <p><strong>Timestamp:</strong> {{ report.timestamp }}</p>
+      <p><strong>Total Distraction:</strong> {{ report.total_distraction_time }}</p>
+      <h4>Distraction Events:</h4>
+      <ul>
+        {% for e in report.distraction_events %}
+          <li>🔸 {{ e.type }} - {{ e.duration }}s at {{ e.start }}</li>
+        {% endfor %}
+      </ul>
+    </div>
+  {% endfor %}
+
+</body>
+</html>

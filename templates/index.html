@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>ProctorEye - Gaze Detection</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+  <style>
+    /* Webcam flip */
+    #webcam {
+      transform: scaleX(-1);
+      -webkit-transform: scaleX(-1); /* Safari support */
+      max-width: 100%;
+      border-radius: 10px;
+    }
+
+    .app-container {
+      text-align: center;
+      padding: 40px;
+      font-family: Arial, sans-serif;
+      color: #333;
+    }
+
+    .app-header h1 {
+      font-size: 36px;
+      margin-bottom: 5px;
+    }
+
+    .app-header p {
+      font-size: 18px;
+      color: #666;
+    }
+
+    .input-section {
+      margin-top: 30px;
+    }
+
+    .input-section input {
+      padding: 10px;
+      font-size: 16px;
+      width: 250px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+    }
+
+    .input-section button {
+      padding: 10px 20px;
+      margin-left: 10px;
+      font-size: 16px;
+      background: #007bff;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    .input-section button:hover {
+      background-color: #0056b3;
+    }
+
+    #mainApp {
+      display: none;
+      margin-top: 30px;
+    }
+
+    .prediction {
+      margin-top: 20px;
+      font-size: 20px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <div id="cheating-alert" style="
+    display: none;
+    background-color: red;
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+    padding: 15px;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;">
+    ⚠️ CHEATING DETECTED!
+</div>
+
+  <div class="app-container">
+    <header class="app-header">
+      <h1>ProctorEye</h1>
+      <p>Live Gaze Detection System</p>
+    </header>
+
+    <!-- ✅ Candidate ID Input -->
+    <div class="input-section" id="formContainer">
+      <input type="text" id="candidateIdInput" placeholder="Enter Candidate ID" required>
+      <button onclick="startTracking()">Start Interview</button>
+    </div>
+
+    <!-- ✅ Webcam + Prediction -->
+    <div id="mainApp">
+      <video id="webcam" autoplay playsinline></video>
+      <div class="prediction">
+        👁️ <span id="prediction">Loading...</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ✅ Load JavaScript -->
+  <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>
